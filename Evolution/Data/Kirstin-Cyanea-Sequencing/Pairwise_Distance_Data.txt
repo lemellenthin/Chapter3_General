@@ -1,0 +1,48 @@
+Title: Phylogenetic Analysis
+Description
+  Analysis ====================
+    Analysis                                  = ====================
+       Scope                                  = Pairs of taxa
+    Estimate Variance                         = ====================
+       Variance Estimation Method             = None
+    Substitution Model                        = ====================
+       Substitutions Type                     = Nucleotide
+       Model/Method                           = Tamura 3-parameter model
+       Substitutions to Include               = d: Transitions + Transversions
+    Rates and Patterns                        = ====================
+       Rates among Sites                      = Gamma Distributed (G)
+          Gamma Parameter                     = 1.00
+       Pattern among Lineages                 = Same (Homogeneous)
+    Data Subset to Use                        = ====================
+       Gaps/Missing Data Treatment            = Pairwise deletion
+
+[ 1] #Horse_Island_2_Cyanea_May_2022_1_{Spring}
+[ 2] #22_Cyanea_sp_DNA_voucher_sep1_2020_Dunn_lab_2_1_{Fall}
+[ 3] #3_Oct29_2021_Cyanea_ephyrae_F2_DNA_LM_1_{Fall}
+[ 4] #20_Sep29_2020_Cyanea_planulae1_tentacle_DNA_LM_1_{Fall}
+[ 5] #10_May7_2021_cyanea5_1_{Spring}
+[ 6] #6_Apr26_2021_cyanea_sp_1_DNA_LM_1_{Spring}
+[ 7] #JN700937.1_Cyanea_capillata_mitochondrion_partial_genome
+[ 8] #JX995347.1_Cyanea_lamarckii_isolate_MT02473_cytochrome_c_oxidase_subunit_I_(COI)_gene_partial_cds_mitochondrial
+[ 9] #GQ120092.1_Cyanea_sp._BO-2009_voucher_Sc11.3.1_cytochrome_oxidase_subunit_I_(COI)_gene_partial_cds_mitochondrial
+[10] #Horse_Island_1_Cyanea_May_2022_1_{Spring}
+
+[        1     2     3     4     5     6     7     8     9    10 ]
+[ 1]        
+[ 2]  0.070       
+[ 3]  0.067 0.002       
+[ 4]  0.069 0.004 0.001       
+[ 5]  0.006 0.070 0.067 0.069       
+[ 6]  0.006 0.064 0.061 0.063 0.007       
+[ 7]  0.067 0.044 0.041 0.043 0.067 0.061       
+[ 8]  0.074 0.076 0.074 0.074 0.068 0.066 0.063       
+[ 9]  0.066 0.002 0.000 0.001 0.064 0.060 0.041 0.074       
+[10]  0.000 0.070 0.067 0.069 0.006 0.006 0.067 0.074 0.066       
+
+Table. Estimates of Evolutionary Divergence between Sequences
+The number of base substitutions per site from between sequences are shown. Analyses were conducted using the Tamura 3-parameter model [1]. The rate variation among sites was modeled with a gamma distribution (shape parameter = 1). This analysis involved 10 nucleotide sequences. All ambiguous positions were removed for each sequence pair (pairwise deletion option). There were a total of 842 positions in the final dataset. Evolutionary analyses were conducted in MEGA11 [2][3]
+
+1. Tamura K. (1992). Estimation of the number of nucleotide substitutions when there are strong transition-transversion and G + C-content biases. Molecular Biology and Evolution 9:678-687.
+2. Tamura K., Stecher G., and Kumar S. (2021). MEGA 11: Molecular Evolutionary Genetics Analysis Version 11. Molecular Biology and Evolution https://doi.org/10.1093/molbev/msab120.
+3. Stecher G., Tamura K., and Kumar S. (2020). Molecular Evolutionary Genetics Analysis (MEGA) for macOS. Molecular Biology and Evolution 37:1237-1239.
+Disclaimer: Although utmost care has been taken to ensure the correctness of the caption, the caption text is provided "as is" without any warranty of any kind. Authors advise the user to carefully check the caption prior to its use for any purpose and report any errors or problems to the authors immediately (www.megasoftware.net). In no event shall the authors and their employers be liable for any damages, including but not limited to special, consequential, or other damages. Authors specifically disclaim all other warranties expressed or implied, including but not limited to the determination of suitability of this caption text for a specific purpose, use, or application.
