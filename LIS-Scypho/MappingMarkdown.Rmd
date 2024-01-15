@@ -1,0 +1,119 @@
+---
+title: "Map-Markdown"
+author: "LEM"
+date: "2023-07-10"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load packages
+
+```{r packages}
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2); library(ggmap); library(maps)
+library(mapproj); library(mapdata); library(rgeos)
+library(maptools); library(sp); library(raster)
+library(rgdal); library(dismo)
+library(crayon); library(ggrepel)
+
+getwd()
+```
+
+## load in data
+
+```{r data}
+cy2023 = read.csv("Data/2023fieldwork-edited.csv")
+print(cy2023)
+
+```
+
+## trim map/location
+
+```{r map}
+#Big LIS
+  #Latitude top = 41.4
+  #Latitude bottom = 40.5
+  #Longitude right = -71
+  #Longitude left = -74
+#Smaller LIS area
+  #Latitude top = 41.35
+  #Latitude bottom = 40.98
+  #Longitude right = -72.1
+  #Longitude left = -73.7
+#example
+  #longrid = seq(-119,-113,0.05) # define the longitude grid
+  #latgrid = seq(33.5,38,0.05) # define the latitude grid
+
+#smallerLIS
+longrid = seq(-73.7,-72.1,0.05) # define the longitude grid
+latgrid = seq(33.5,38,0.05) # define the latitude grid
+
+#setrange
+range(cy2023$latitude)
+  # [1] 41.10160 41.33756
+range(cy2023$longitude)
+  # [1] -73.41670 -72.02018
+
+# download map images
+base = get_map(location=c(-73.5,41,-71.8,41.4), zoom=10, maptype="terrain-background", source = c("google", "osm", "stamen"))
+map1 = ggmap(base)
+map1
+```
+
+## label points
+
+```{r points}
+  
+visitnosight = cy2023[cy2023$Sighted == 'N',]
+visitsight = cy2023[cy2023$Sighted != 'N',]
+visitcollect = cy2023[cy2023$Collected == 'Y',]
+visitDNA = cy2023[cy2023$DNA == 'Y',]
+visitsequence = cy2023[cy2023$Sequence == 'Y',]
+
+#made column in file that is 'group' where i manually labeled the groups
+
+```
+
+## map points
+
+```{r mapping}
+
+map1 +
+  geom_point(data=cy2023,aes(x=longitude,y=latitude,colour = Collections, 
+                             shape = Collections, size=Collections)) + 
+  scale_color_manual(values=c("red", "blue", "purple", "orange","green"),
+                     labels=c("Visited Not Sighted (n=12)","Sighted (n=13)",
+                              "Collected (n=6)",
+                              "Collected, DNA (n=5)",
+                              "Collected, DNA & Sequenced (n=1)")) + 
+  scale_shape_manual(values=c(7,10,18,15,19),
+                     labels=c("Visited Not Sighted (n=12)","Sighted (n=13)",
+                             "Collected (n=6)",
+                             "Collected, DNA (n=5)",
+                             "Collected, DNA & Sequenced (n=1)")) + 
+  scale_size_manual(values=c(5,5,3,4,9),
+                    labels=c("Visited Not Sighted (n=12)","Sighted (n=13)",
+                            "Collected (n=6)",
+                            "Collected, DNA (n=5)",
+                            "Collected, DNA & Sequenced (n=1)")) +
+  labs(x="Latitude", y="Longitude", title="Collection sites 2023 \n(n=25)") +
+  theme(plot.title=element_text(hjust=0.5, size=rel(2))) +
+  theme(legend.title.align=0.5,
+        panel.border = element_rect(colour = "black", fill=NA),
+        legend.box.background = element_rect(color = "black",fill = "white"),
+        legend.position=c(0.88, 0.292), 
+        axis.text = element_text(size = rel(0.9)), 
+        legend.key = element_rect(colour = "white"), 
+        axis.text.x = element_text(angle=45, vjust=0.5),
+        legend.text=element_text(size=8.45),
+        legend.key.size = unit(2, 'cm'), #change legend key size
+        legend.key.height = unit(0.8, 'cm'), #change legend key height
+        legend.key.width = unit(1.4, 'cm'),
+        legend.title=element_text(size=11)) 
+
+```
+
+

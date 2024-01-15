@@ -1,0 +1,26 @@
+latitude,longitude,species,date,season,Where,Sighted,Collected,DNA,Sequence
+41.26637,72.5347,CyaneaFulva,Feb27-2023,Spring,Clinton,N,N,N,N
+41.1016,73.4167,CyaneaFulva,Feb24-2023,Spring,Norwalk,N,N,N,N
+41.26637,72.5347,CyaneaFulva,March8-2023,Spring,Clinton,Y,Y,Y,Y
+41.2352,-72.9047,CyaneaFulva,April5-2023,Spring,NH Harbor,Y,Y,Y,N
+41.26732,72.5357,CyaneaFulva,April9-2023,Spring,Clinton,Y,Y,Y,N
+41.2352,-72.9047,CyaneaFulva,April9-2023,Spring,NH Harbor,Y,Y,Y,N
+41.33752,72.18732,CyaneaFulva,April14-2023,Spring,Niantic,N,N,N,N
+41.33756,72.18641,CyaneaFulva,April22-2023,Spring,Niantic,Y,N,N,N
+41.26832,72.52048,CyaneaFulva,May8-2023,Spring,Clinton,Y,N,N,N
+41.24563,72.75736,CyaneaFulva,May12-2023,Spring,Horse Island,Y,N,N,N
+41.25908,72.73092,CyaneaFulva,May13-2023,Spring,Guilford,Y,N,N,N
+41.26635,72.53506,CyaneaFulva,May18-2023,Spring,Clinton,Y,Y,Y,N
+41.24563,72.75736,CyaneaFulva,May25-2023,Spring,Horse Island,N,N,N,N
+41.33756,72.18641,CyaneaFulva,May28-2023,Spring,Niantic,Y,N,N,N
+41.3213,72.02018,CyaneaFulva,May29-2023,Spring,Mumford Cove,N,N,N,N
+41.25908,72.73092,CyaneaFulva,June8-2023,Spring,Guilford,N,N,N,N
+41.1016,73.4167,CyaneaFulva,June20-2023,Spring,Norwalk,N,N,N,N
+41.24906,72.54279,CyaneaFulva,June20-2023,Spring,Hammonasset,N,N,N,N
+41.25908,72.73092,CyaneaFulva,June20-2023,Spring,Guilford,N,N,N,N
+41.25908,72.73092,CyaneaFulva,June26-2023,Spring,Guilford,N,N,N,N
+41.25908,72.73092,CyaneaFulva,June30-2023,Spring,Guilford,N,N,N,N
+41.3213,72.02018,CyaneaFulva,June30-2023,Spring,Mumford Cove,N,N,N,N
+41.26636,72.53467,CyaneaSp,July1-2023,Hybrid,Clinton,Y,Y,N,N
+41.29792,72.24532,CyaneaSp,July2-2023,Hybrid,Rocky Neck,Y,N,N,N
+41.33756,72.18641,CyaneaSp,July2-2023,Hybrid,Niantic,Y,N,N,N
