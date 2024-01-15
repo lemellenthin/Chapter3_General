@@ -1,0 +1,273 @@
+"""
+Snakemake mapping workflow
+Modified from https://snakemake.readthedocs.io/en/stable/tutorial/advanced.html
+"""
+import sys
+configfile: "config.yaml"
+scratchdir = config["scratchdir"]
+wildcard_constraints:
+    sample="[A-Za-z0-9\-]+"
+
+# state the output you want
+rule all:
+    input:
+        expand(scratchdir + "fastqc/{sample}_sub_R1", sample=config["sample"]), # subsetted reads
+        expand(scratchdir + "mapped_sorted/{sample}_pic.bam", sample=config["sample"]), # mapped, sorted, and indexed reads
+        expand(scratchdir + "mapped_sorted/{sample}_stat.txt", sample=config["sample"]), # stats on mapping
+        scratchdir + "calls/all_filtered_subsample.vcf.gz", # a merged VCF you can use to evaluate mapping, missingness, etc
+
+# prep the reads
+rule reads_subset:
+    input:
+        READ1 = lambda wildcards: config["sample"][wildcards.sample]["reads"][0],
+        READ2 = lambda wildcards: config["sample"][wildcards.sample]["reads"][1]
+    output:
+        R1 = "reads/{sample}_sub_R1.fastq",
+        R2 = "reads/{sample}_sub_R2.fastq"
+    shell:
+        """
+        set +o pipefail;
+        zcat {input.READ1} | head --lines=400000000 > {output.R1}
+        zcat {input.READ2} | head --lines=400000000 > {output.R2}
+        """
+rule fastqc:
+    input:
+        "reads/{sample}_sub_R1.fastq"
+    output:
+        directory(scratchdir + "fastqc/{sample}_sub_R1")
+    log:
+        "logs/fastqc/{sample}.log"
+    shell:
+        """
+        mkdir {output}
+        fastqc {input} --outdir {output} 2> {log}
+        """ 
+rule trimmomatic_pe:
+    priority: 1
+    input:
+        READ1 = "reads/{sample}_sub_R1.fastq",
+        READ2 = "reads/{sample}_sub_R2.fastq"
+    output:
+        TRIM1P = temp( scratchdir + "trimmed/{sample}.R1.trimmed.fastq" ),
+        TRIM1U = temp( scratchdir + "trimmed/{sample}.R1.unpaired.trimmed.fastq" ),
+        TRIM2P = temp( scratchdir + "trimmed/{sample}.R2.trimmed.fastq" ),
+        TRIM2U = temp( scratchdir + "trimmed/{sample}.R2.unpaired_trimmed.fastq" )
+    log:
+        "logs/trimmomatic/{sample}.log"
+    threads: workflow.cores - 2
+    shell:
+        """
+        echo ">PrefixPE/1\nTACACTCTTTCCCTACACGACGCTCTTCCGATCT\n>PrefixPE/2\nGTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT" > TruSeq3-PE.fa
+        java -jar $EBROOTTRIMMOMATIC/trimmomatic-0.39.jar PE -threads $SLURM_CPUS_PER_TASK \
+        {input.READ1} \
+        {input.READ2} \
+        {output.TRIM1P} \
+        {output.TRIM1U} \
+        {output.TRIM2P} \
+        {output.TRIM2U} \
+        ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:2:True LEADING:15 TRAILING:15 MINLEN:50 2> {log}
+        """
+
+# prep the reference 
+rule bwa_index:
+    input:
+        config["genome"]
+    output:
+        config["genome"] + ".bwt"
+    shell:
+        "bwa index {input}"
+rule fasta_index:
+    input:
+        config["genome"]
+    output:
+        config["genome"] + ".fai"
+    shell:
+        "samtools faidx {input}"
+
+# map reads to reference
+rule bwa_map:
+    priority: 10
+    input:
+        INDEX = config["genome"] + ".bwt",
+        ASSEM = config["genome"],
+        READ1 = scratchdir + "trimmed/{sample}.R1.trimmed.fastq",
+        READ2 = scratchdir + "trimmed/{sample}.R2.trimmed.fastq"
+    output:
+        temp( scratchdir + "mapped_reads/{sample}.bam" )
+    log:
+        "logs/bwa_mem/{sample}.log"
+    threads: workflow.cores -2
+    shell:
+        """
+        (bwa mem -t {threads} {input.ASSEM} {input.READ1} {input.READ2} | \
+          samtools view -Sb - > {output}) &> {log}
+        """
+rule picard_sort:
+    input:
+        scratchdir + "mapped_reads/{sample}.bam"
+    output:
+        temp( scratchdir + "mapped_sorted/{sample}_sorted.bam" )
+    log:
+        "logs/picard/{sample}_sort.log"
+    shell:
+        """
+        java -jar $EBROOTPICARD/picard.jar SortSam \
+            I={input} \
+            O={output} \
+            SORT_ORDER=coordinate &> {log}
+        """
+rule picard_dedup:
+    input:
+        scratchdir + "mapped_sorted/{sample}_sorted.bam"
+    output:
+        DEDUP = temp( scratchdir + "mapped_sorted/{sample}_dedup.bam" ),
+        METRIC = scratchdir + "mapped_sorted/{sample}_dup_metrics.txt"
+    log:
+        "logs/picard/{sample}_dedup.log"
+    shell:
+        """
+        java -jar $EBROOTPICARD/picard.jar MarkDuplicates \
+            I={input} \
+            O={output.DEDUP} \
+            M={output.METRIC} \
+            REMOVE_DUPLICATES=true &> {log}
+        """
+rule picard_readgroup_index:
+    priority: 30 
+    input: 
+        scratchdir + "mapped_sorted/{sample}_dedup.bam",
+    output: 
+        BAM = scratchdir + "mapped_sorted/{sample}_pic.bam",
+        IND = scratchdir + "mapped_sorted/{sample}_pic.bam.bai"
+    params: 
+        SAMPLE = "{sample}"
+    log:
+        "logs/picard/{sample}_readgroup.log"
+    shell:
+        """
+        java -jar $EBROOTPICARD/picard.jar AddOrReplaceReadGroups \
+            I={input} \
+            O={output.BAM} \
+            RGID=1 \
+            RGLB=lib1 \
+            RGPL=ILLUMINA \
+            RGPU=unit1 \
+            RGSM={params.SAMPLE} &> {log}
+        samtools index {output.BAM} &> {log}
+        """
+rule flagstat:
+    input:
+        scratchdir + "mapped_sorted/{sample}_pic.bam"
+    output:
+        scratchdir + "mapped_sorted/{sample}_stat.txt"
+    shell:
+        "samtools flagstat {input} > {output}"
+rule bam_list:
+    input:
+        expand(scratchdir+"mapped_sorted/{sample}_pic.bam",sample=config["sample"])
+    output:
+        BAMS_TMP = temp( scratchdir + "mapped_sorted/tmp.filelist" ),
+        BAMS = scratchdir + "mapped_sorted/bam.filelist"
+    shell:
+        """
+        echo {input} >> {output.BAMS_TMP}
+        cat {output.BAMS_TMP} | tr " " "\\n" > {output.BAMS} 
+        """
+
+# call SNPs on subset of exons, for QC
+rule filter_gff:
+    input: 
+        #TRANS = config["transcripts"],
+        GFF = config["gff"]
+    output: 
+        TSV = scratchdir + "collapsed_transcript_regions.tsv",
+        LIST = scratchdir + "collapsed_transcript_regions.list"
+    shell:
+        """
+        grep "exon" {input.GFF} | \
+        awk -F "\\t" '{{print $1"\t"$4"\t"$5}}' >{output.TSV} 
+        cat {output.TSV} | awk -F "\\t" '{{print $1":"$2"-"$3}}' >{output.LIST}
+        """
+rule bcftools_call:
+    priority: 50
+    input:
+        FA = config["genome"],
+        SORT = scratchdir + "mapped_sorted/{sample}_pic.bam",
+        IND = scratchdir + "mapped_sorted/{sample}_pic.bam.bai"
+    output:
+        BCF = scratchdir + "calls/{sample}_raw.bcf",
+        IND = scratchdir + "calls/{sample}_raw.bcf.csi"
+    log:
+        "logs/bcftools_call/{sample}.log"
+    shell:
+        """
+        (bcftools mpileup -f {input.FA} {input.SORT} |
+        bcftools call -m -Ob -f GQ -o {output.BCF}) &> {log}
+        bcftools index {output.BCF}
+        """
+        
+rule bcftools_filter:
+    input:
+        BCF = scratchdir + "calls/{sample}_raw.bcf",
+        IND = scratchdir + "calls/{sample}_raw.bcf.csi",
+        REG = scratchdir + "collapsed_transcript_regions.tsv"
+    output:
+        BCF = temp( scratchdir + "calls/{sample}_filtered.bcf" ),
+        IND = temp( scratchdir + "calls/{sample}_filtered.bcf.csi" )
+    log:
+        "logs/bcftools_call/{sample}_filter.log"
+    shell:
+        """
+        bcftools filter -Ob -R {input.REG} {input.BCF} -o {output.BCF} &> {log}
+        bcftools index {output.BCF}
+        """
+rule bcftools_merge:
+    input:
+        BCF = expand( scratchdir + "calls/{sample}_filtered.bcf", sample=config["sample"] ),
+        IND = expand( scratchdir + "calls/{sample}_filtered.bcf.csi", sample=config["sample"] )
+    output:
+        BCF = temp( scratchdir + "calls/all_filtered.bcf" ),
+        IND = temp( scratchdir + "calls/all_filtered.bcf.csi" )
+    threads: 
+        workflow.cores
+    log:
+        "logs/bcftools_call/merge.log"
+    shell:
+        """
+        bcftools merge {input.BCF} -Ob -o {output.BCF} --threads {threads} &> {log}
+        bcftools index {output.BCF}
+        """
+rule bcftools_convert:
+    priority: 60
+    input:
+        BCF = scratchdir + "calls/all_filtered.bcf", 
+        IND = scratchdir + "calls/all_filtered.bcf.csi"
+    output:
+        temp( scratchdir + "calls/all_filtered.vcf.gz" )
+    log:
+        "logs/bcftools_call/convert.log"
+    shell:
+        "bcftools convert -Oz {input} -o {output} &> {log}"
+       
+rule bcftools_subsample:
+    input:
+        scratchdir + "calls/all_filtered.vcf.gz"
+    output:
+        temp( scratchdir + "calls/all_filtered_subsample.vcf" ),
+    log:
+        "logs/bcftools_call/subsample.log"
+    shell:
+        """
+        bcftools view {input} | vcfrandomsample -r 0.1 > {output}
+        """
+rule bgzip:
+    input:
+        scratchdir + "calls/all_filtered_subsample.vcf"
+    output:
+        scratchdir + "calls/all_filtered_subsample.vcf.gz"
+    log:
+        "logs/bcftools_call/bgzip.log"
+    shell:
+        """
+        bgzip {input}
+        """

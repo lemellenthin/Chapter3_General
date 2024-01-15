@@ -1,0 +1,29 @@
+# where you want results to go
+scratchdir: "/gpfs/gibbs/pi/dunn/sc2962/20240108_Nanomia_PopGen/"
+
+# reference genome or isoseq fasta file
+genome: "/gpfs/gibbs/project/dunn/na375/Nanomia_pacific_genome/NS_hap2_v0.8.fasta"
+# optional list of transcripts, if using a genome reference, not needed for isoseq
+gff: "/gpfs/gibbs/project/dunn/na375/Nanomia_pacific_genome/PO2744_Nanomia_bijuga.annotation.gff"
+
+# parameters that, in the first pass, you won't know exactly how to set
+prior_mutation_rate: 0.001
+min_qual: 20
+min_depth: 2
+max_depth: 99
+min_ind: 1
+
+# list of samples, with an ID, and then a list of two read files for each
+sample:
+  Nanomia-rhody-NA28:
+    reads:
+    - /gpfs/gibbs/project/dunn/na375/Sample_NA28_165_028/subset/Nanomia-rhody_NA28_R1_20x.fastq.gz
+    - /gpfs/gibbs/project/dunn/na375/Sample_NA28_165_028/subset/Nanomia-rhody_NA28_R2_20x.fastq.gz
+  Nanomia-villefranche-NA30:
+    reads:
+    - /gpfs/gibbs/project/dunn/na375/Sample_NA30_153_040/Nanomia-villefranche_NA30_R1_20x.fastq.gz
+    - /gpfs/gibbs/project/dunn/na375/Sample_NA30_153_040/Nanomia-villefranche_NA30_R2_20x.fastq.gz
+  Nanomia-hawaii-NA29:
+    reads:
+    - /gpfs/gibbs/project/dunn/na375/Sample_NA29_141_052/Nanomia-hawaii_NA29_R1_20x.fastq.gz
+    - /gpfs/gibbs/project/dunn/na375/Sample_NA29_141_052/Nanomia-hawaii_NA29_R2_20x.fastq.gz

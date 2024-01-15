@@ -1,0 +1,35 @@
+---
+# where you want results to go
+scratchdir: "/gpfs/gibbs/project/dunn/lem79/CyaneaPopGen/Mapping/"
+
+# reference genome or isoseq fasta file
+genome: "/gpfs/gibbs/project/dunn/lem79/CyaneaPopGen/Mapping/IsoSeq/Filtered/Cyanea_sp_transcripts.strict.fasta"
+
+# parameters that, in the first pass, you won't know exactly how to set
+prior_mutation_rate: 0.001
+min_qual: 20
+min_depth: 2
+max_depth: 99
+min_ind: 1
+
+# list of samples, with an ID, and then a list of two read files for each
+sample:
+ CyaneaCapillataLEM1:
+  reads:
+   - /gpfs/gibbs/project/dunn/lem79/CyaneaPopGen/Mapping/Illumina/CyaneaCapillata/LEM1/LEM1_098_095_S38_L003_R1_001.fastq.gz
+   - /gpfs/gibbs/project/dunn/lem79/CyaneaPopGen/Mapping/Illumina/CyaneaCapillata/LEM1/LEM1_098_095_S38_L003_R2_001.fastq.gz
+  CyaneaCapillataLEM2:
+   - /gpfs/gibbs/project/dunn/lem79/CyaneaPopGen/Mapping/Illumina/CyaneaCapillata/LEM2/LEM2_181_012_S39_L003_R1_001.fastq.gz
+   - /gpfs/gibbs/project/dunn/lem79/CyaneaPopGen/Mapping/Illumina/CyaneaCapillata/LEM2/LEM2_181_012_S39_L003_R2_001.fastq.gz
+  CyaneaCapillataLEM6:
+   - /gpfs/gibbs/project/dunn/lem79/CyaneaPopGen/Mapping/Illumina/CyaneaCapillata/LEM6/LEM6_169_024_S40_L003_R1_001.fastq.gz
+   - /gpfs/gibbs/project/dunn/lem79/CyaneaPopGen/Mapping/Illumina/CyaneaCapillata/LEM6/LEM6_169_024_S40_L003_R2_001.fastq.gz
+  CyaneaCapillataLEM137:
+   - /gpfs/gibbs/project/dunn/lem79/CyaneaPopGen/Mapping/Illumina/CyaneaCapillata/LM137/LM137_171_022_S3_L007_R1_001.fastq.gz
+   - /gpfs/gibbs/project/dunn/lem79/CyaneaPopGen/Mapping/Illumina/CyaneaCapillata/LM137/LM137_171_022_S3_L007_R2_001.fastq.gz
+  CyaneaFulvaLMD324:
+   - /gpfs/gibbs/project/dunn/lem79/CyaneaPopGen/Mapping/Illumina/CyaneaFulva/LMD324/LMD324_136_057_S21_L008_R1_001.fastq.gz
+   - /gpfs/gibbs/project/dunn/lem79/CyaneaPopGen/Mapping/Illumina/CyaneaFulva/LMD324/LMD324_136_057_S21_L008_R2_001.fastq.gz
+  CyaneaFulvaLMD524:
+   - /gpfs/gibbs/project/dunn/lem79/CyaneaPopGen/Mapping/Illumina/CyaneaFulva/LMD524/LMD524_148_045_S22_L008_R1_001.fastq.gz
+   - /gpfs/gibbs/project/dunn/lem79/CyaneaPopGen/Mapping/Illumina/CyaneaFulva/LMD524/LMD524_148_045_S22_L008_R2_001.fastq.gz
