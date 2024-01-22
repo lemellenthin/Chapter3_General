@@ -1,5 +1,8 @@
-# Chapter3
-Chapter3Analysis
+**This is the general repository for Chapter3**  
 
-PopGen Analysis through cluster in separate repository  
+***
+
+_PopGen Analysis through cluster in separate repository_    
 https://github.com/lemellenthin/Chap3PopGenCluster
+
+***  
