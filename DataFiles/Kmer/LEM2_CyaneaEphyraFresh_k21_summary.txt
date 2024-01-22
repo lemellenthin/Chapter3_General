@@ -1,0 +1,15 @@
+GenomeScope version 2.0
+input file = output/LEM2_CyaneaEphyraFresh_21.histo
+output directory = LEM2_CyaneaEphyraFresh_k21
+p = 2
+k = 21
+name prefix = LEM2_CyaneaEphyraFresh_k21
+
+property                      min               max               
+Homozygous (aa)               97.3255%          97.3633%          
+Heterozygous (ab)             2.63672%          2.67447%          
+Genome Haploid Length         215,931,962 bp    216,382,985 bp    
+Genome Repeat Length          88,482,087 bp     88,666,902 bp     
+Genome Unique Length          127,449,875 bp    127,716,083 bp    
+Model Fit                     68.5216%          97.7184%          
+Read Error Rate               0.529586%         0.529586%         

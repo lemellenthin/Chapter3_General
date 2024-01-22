@@ -1,0 +1,168 @@
+"""
+This snakefile makes k-mer spectra using a bunch of reads in a file
+"""
+configfile: "config_kmers.yaml"
+
+target_kmers = [21]
+
+
+rule all:
+    input:
+        expand("output/{sample}_{thisk}.histo.pdf", sample = config["sample"], thisk = target_kmers),
+        expand("output/{sample}_{thisk}.freqxcov.pdf", sample = config["sample"], thisk = target_kmers),
+        expand("output/{sample}_k{thisk}_linear_plot.png", sample = config["sample"], thisk = target_kmers),
+        expand("output/{sample}_k{thisk}_summary.txt", sample = config["sample"], thisk = target_kmers),
+        "output/genome_size_report.tsv"
+
+
+rule generate_spectrum:
+    input:
+        reads = lambda wildcards: [x for x in config["sample"][wildcards.sample]["reads"]]
+    output:
+        histo = "output/{sample}_{thisk}.histo",
+        read_count = "output/{sample}_{thisk}.count",
+        jf = temporary("output/{sample}_{thisk}.jf")
+    params:
+        sample = lambda wildcards: wildcards.sample,
+        thisk = lambda wildcards: wildcards.thisk,
+    threads: workflow.cores
+    log: "logs/jellyfish.{sample}_{thisk}.log"
+    shell:
+        """
+        zcat {input.reads}/*.fastq.gz | \
+           tee >(awk 'END {{print NR/4}}' > {output.read_count}) | \
+           jellyfish count -C -m {params.thisk} -s 1000000000 -t {threads} /dev/fd/0 -o {output.jf}
+        jellyfish histo -t {threads} {output.jf} > {output.histo}
+        #rm output/{params.sample}_{params.thisk}.jf
+        """
+
+rule generate_freqxcov_histo:
+    input:
+        histo = "output/{sample}_{thisk}.histo"
+    output:
+        freqxcov = "output/{sample}_{thisk}.freqxcov"
+    params:
+        sample = lambda wildcards: wildcards.sample,
+        thisk = lambda wildcards: wildcards.thisk,
+    threads: 1
+    shell:
+        """
+        awk '{{print($1, $1*$2)}}' {input.histo} > {output.freqxcov}
+        """
+
+rule generate_kmer_spectrum:
+    input:
+        histo = "output/{sample}_{thisk}.histo"
+    output:
+        pdf   = "output/{sample}_{thisk}.histo.pdf"
+    params:
+        sample = lambda wildcards: wildcards.sample,
+        thisk = lambda wildcards: wildcards.thisk,
+    threads: 1
+    shell:
+        """
+        cat {input.histo} | python plot_uniq_c.py -x 15 -X 400 -d -s \
+          --xlab 'coverage' --ylab 'frequency' \
+          --title '{params.sample} k-{params.thisk} spectrum' \
+          -o {output.pdf}
+        """
+
+rule generate_freqcov_spectrum:
+    input:
+        freqxcov = "output/{sample}_{thisk}.freqxcov"
+    output:
+        pdf = "output/{sample}_{thisk}.freqxcov.pdf"
+    params:
+        sample = lambda wildcards: wildcards.sample,
+        thisk = lambda wildcards: wildcards.thisk,
+    threads: 1
+    shell:
+        """
+        cat {input.freqxcov} | python plot_uniq_c.py -x 0 -X 30 -d -s \
+          --xlab 'coverage' --ylab 'frequency * coverage' \
+          --title '{params.sample} k-{params.thisk} spectrum' \
+          -o {output.pdf}
+        """
+
+rule run_genomescope2:
+    """
+    Just runs genomescope on the output of the last file
+    """
+    input:
+        histo = "output/{sample}_{thisk}.histo"
+    output:
+        plot = "output/{sample}_k{thisk}_linear_plot.png",
+        summary = "output/{sample}_k{thisk}_summary.txt"
+    params:
+        sample = lambda wildcards: wildcards.sample,
+        thisk = lambda wildcards: wildcards.thisk,
+    threads: 1
+    shell:
+        """
+        genomescope2 -i {input.histo} -o {params.sample}_k{params.thisk} \
+          -k {params.thisk} -n {params.sample}_k{params.thisk}
+        mv {params.sample}_k{params.thisk}/* output/
+        rm -r {params.sample}_k{params.thisk}/
+        """
+
+rule final_report:
+    input:
+        expand("output/{sample}_k{thisk}_summary.txt", sample = config["sample"], thisk = target_kmers),
+        expand("output/{sample}_{thisk}.count", sample = config["sample"], thisk = target_kmers)
+    output:
+        report = "output/genome_size_report.tsv"
+    run:
+        list_of_results = []
+        for this_sample in config["sample"]:
+            for this_kmer in target_kmers:
+                
+                count = -1
+                count_file = f"output/{this_sample}_{this_kmer}.count"
+                with open(count_file, "r") as f:
+                    for line in f:
+                        line = line.strip()
+                        count = int(line)
+                
+                targetfile = "output/{}_k{}_summary.txt".format(this_sample, this_kmer)
+                with open(targetfile, "r") as f:
+                #with open(input[0], "r") as f:
+                    dict_of_vals = {}
+                    dict_of_vals["sample"] = this_sample
+                    dict_of_vals["read_count"] = count
+                    dict_of_vals["ploidy"] = 2
+                    dict_of_vals["k"] = this_kmer
+                    start_count = False
+                    counter = 0
+                    for line in f:
+                        line = line.strip()
+                        if line:
+                            splitd = line.split()
+                            if splitd[0] == "property":
+                                start_count = True
+                            if start_count:
+                                if counter == 1:
+                                    dict_of_vals["min_hom"] = float(splitd[2].strip("%"))
+                                    dict_of_vals["max_hom"] = float(splitd[3].strip("%"))
+                                elif counter == 2:
+                                    dict_of_vals["min_het"] = float(splitd[2].strip("%"))
+                                    dict_of_vals["max_het"] = float(splitd[3].strip("%"))
+                                elif counter == 3:
+                                    dict_of_vals["min_hap_len"] =  splitd[3].replace("," , "")
+                                    dict_of_vals["max_hap_len"] =  splitd[5].replace("," , "")
+                                elif counter == 4:
+                                    dict_of_vals["min_rep_len"] =  splitd[3].replace("," , "")
+                                    dict_of_vals["max_rep_len"] =  splitd[5].replace("," , "")
+                                elif counter == 5:
+                                    dict_of_vals["min_uniq_len"] = splitd[3].replace("," , "")
+                                    dict_of_vals["max_uniq_len"] = splitd[5].replace("," , "")
+                                elif counter == 6:
+                                    dict_of_vals["min_model_fit"] = float(splitd[2].strip("%"))
+                                    dict_of_vals["max_model_fit"] = float(splitd[3].strip("%"))
+                                elif counter == 7:
+                                    dict_of_vals["min_read_error_rate"] = float(splitd[3].strip("%"))
+                                    dict_of_vals["max_read_error_rate"] = float(splitd[4].strip("%"))
+                                counter += 1
+                    list_of_results.append(dict_of_vals)
+        import pandas as pd
+        df = pd.DataFrame(list_of_results)
+        df.to_csv(output.report, sep="\t")

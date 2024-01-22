@@ -1,0 +1,4 @@
+sample:
+  Physalia-TX2017-38:
+    reads:
+      - /gpfs/ysm/scratch60/dunn/cwd7/20230203_physalia_atlantic_data/hifi/ 

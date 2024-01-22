@@ -1,0 +1,15 @@
+GenomeScope version 2.0
+input file = output/LEM6_CyaneaMedusaHalf_21.histo
+output directory = LEM6_CyaneaMedusaHalf_k21
+p = 2
+k = 21
+name prefix = LEM6_CyaneaMedusaHalf_k21
+
+property                      min               max               
+Homozygous (aa)               97.3085%          97.3441%          
+Heterozygous (ab)             2.65591%          2.69146%          
+Genome Haploid Length         208,557,222 bp    209,043,734 bp    
+Genome Repeat Length          82,100,408 bp     82,291,928 bp     
+Genome Unique Length          126,456,813 bp    126,751,806 bp    
+Model Fit                     67.3878%          96.7371%          
+Read Error Rate               0.490144%         0.490144%         

@@ -1,0 +1,15 @@
+GenomeScope version 2.0
+input file = output/Cyanea_LAM1-2-6_21.histo
+output directory = Cyanea_LAM1-2-6_k21
+p = 2
+k = 21
+name prefix = Cyanea_LAM1-2-6_k21
+
+property                      min               max               
+Homozygous (aa)               97.9629%          98.147%           
+Heterozygous (ab)             1.85304%          2.03705%          
+Genome Haploid Length         201,064,863 bp    205,241,714 bp    
+Genome Repeat Length          69,147,058 bp     70,583,495 bp     
+Genome Unique Length          131,917,805 bp    134,658,220 bp    
+Model Fit                     57.6293%          82.1234%          
+Read Error Rate               1.05445%          1.05445%          

@@ -1,0 +1,15 @@
+GenomeScope version 2.0
+input file = output/LEM1_CyaneaAdultMedusaFresh_21.histo
+output directory = LEM1_CyaneaAdultMedusaFresh_k21
+p = 2
+k = 21
+name prefix = LEM1_CyaneaAdultMedusaFresh_k21
+
+property                      min               max               
+Homozygous (aa)               97.3096%          97.3499%          
+Heterozygous (ab)             2.65005%          2.69039%          
+Genome Haploid Length         221,393,424 bp    221,953,933 bp    
+Genome Repeat Length          94,959,213 bp     95,199,624 bp     
+Genome Unique Length          126,434,211 bp    126,754,309 bp    
+Model Fit                     66.3879%          97.9779%          
+Read Error Rate               0.550347%         0.550347%         
