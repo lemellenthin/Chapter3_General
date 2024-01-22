@@ -22,7 +22,6 @@ module load FastQC
 module list
 
 # conda activate pcangsd
-
-conda activate pcangsd
+conda activate snakemake
 
 snakemake --scheduler greedy --verbose --rerun-incomplete --cores $SLURM_CPUS_PER_TASK --latency-wait 60

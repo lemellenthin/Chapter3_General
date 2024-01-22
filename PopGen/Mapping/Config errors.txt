@@ -1,0 +1,456 @@
+Config errors
+
+error: expected <block end>, but found '<scalar>' (syntax)
+  68:81     error    line too long (92 > 80 characters)  (line-length)
+  75:81     error    line too long (91 > 80 characters)  (line-length)
+  231:81    error    line too long (95 > 80 characters)  (line-length)
+  235:13    error    trailing spaces  (trailing-spaces)
+  241:81    error    line too long (83 > 80 characters)  (line-length)
+  247:53    error    trailing spaces  (trailing-spaces)
+  255:1     error    trailing spaces  (trailing-spaces)
+  277:12    error    no new line character at the end of file  (new-line-at-end-of-file)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:3      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  68:81     error    line too long (92 > 80 characters)  (line-length)
+  75:81     error    line too long (91 > 80 characters)  (line-length)
+  231:81    error    line too long (95 > 80 characters)  (line-length)
+  235:13    error    trailing spaces  (trailing-spaces)
+  241:81    error    line too long (83 > 80 characters)  (line-length)
+  247:53    error    trailing spaces  (trailing-spaces)
+  255:1     error    trailing spaces  (trailing-spaces)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:3      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  68:81     error    line too long (92 > 80 characters)  (line-length)
+  75:81     error    line too long (91 > 80 characters)  (line-length)
+  231:81    error    line too long (95 > 80 characters)  (line-length)
+  235:13    error    trailing spaces  (trailing-spaces)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:3      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  68:81     error    line too long (92 > 80 characters)  (line-length)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:3      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:3      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:3      error    syntax error: expected <block end>, but found ',' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:3      error    syntax error: expected <block end>, but found ',' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:3      error    syntax error: expected <block end>, but found ',' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:3      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:3      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:3      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  12:81     warning  too few spaces before comment  (comments)
+  12:81     error    line too long (97 > 80 characters)  (line-length)
+  13:9      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  13:89     warning  too few spaces before comment  (comments)
+  13:81     error    line too long (123 > 80 characters)  (line-length)
+  14:9      error    wrong indentation: expected 4 but found 8  (indentation)
+  14:90     warning  too few spaces before comment  (comments)
+  14:81     error    line too long (107 > 80 characters)  (line-length)
+  15:9      error    wrong indentation: expected 4 but found 8  (indentation)
+  15:68     warning  too few spaces before comment  (comments)
+  15:81     error    line too long (131 > 80 characters)  (line-length)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  12:81     error    line too long (98 > 80 characters)  (line-length)
+  13:9      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  13:81     error    line too long (124 > 80 characters)  (line-length)
+  14:9      error    wrong indentation: expected 4 but found 8  (indentation)
+  14:81     error    line too long (108 > 80 characters)  (line-length)
+  15:9      error    wrong indentation: expected 4 but found 8  (indentation)
+  15:81     error    line too long (132 > 80 characters)  (line-length)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:9      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  16:9      error    wrong indentation: expected 4 but found 8  (indentation)
+  18:9      error    wrong indentation: expected 4 but found 8  (indentation)
+  19:81     error    line too long (86 > 80 characters)  (line-length)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  12:81     error    line too long (94 > 80 characters)  (line-length)
+  13:5      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  13:81     error    line too long (120 > 80 characters)  (line-length)
+  14:5      error    wrong indentation: expected 2 but found 4  (indentation)
+  14:81     error    line too long (104 > 80 characters)  (line-length)
+  15:5      error    wrong indentation: expected 2 but found 4  (indentation)
+  18:5      error    wrong indentation: expected 2 but found 4  (indentation)
+  19:9      error    wrong indentation: expected 6 but found 8  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:5      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  14:81     error    line too long (120 > 80 characters)  (line-length)
+  15:5      error    wrong indentation: expected 2 but found 4  (indentation)
+  15:81     error    line too long (104 > 80 characters)  (line-length)
+  16:5      error    wrong indentation: expected 2 but found 4  (indentation)
+  19:5      error    wrong indentation: expected 2 but found 4  (indentation)
+  20:9      error    wrong indentation: expected 6 but found 8  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  12:81     error    line too long (94 > 80 characters)  (line-length)
+  13:5      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  13:81     error    line too long (120 > 80 characters)  (line-length)
+  14:5      error    wrong indentation: expected 2 but found 4  (indentation)
+  14:81     error    line too long (104 > 80 characters)  (line-length)
+  15:5      error    wrong indentation: expected 2 but found 4  (indentation)
+  18:5      error    wrong indentation: expected 2 but found 4  (indentation)
+  19:9      error    wrong indentation: expected 6 but found 8  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:5      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  14:81     error    line too long (120 > 80 characters)  (line-length)
+  15:5      error    wrong indentation: expected 2 but found 4  (indentation)
+  15:81     error    line too long (104 > 80 characters)  (line-length)
+  16:5      error    wrong indentation: expected 2 but found 4  (indentation)
+  19:5      error    wrong indentation: expected 2 but found 4  (indentation)
+  20:9      error    wrong indentation: expected 6 but found 8  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:5      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  14:81     error    line too long (120 > 80 characters)  (line-length)
+  15:5      error    wrong indentation: expected 2 but found 4  (indentation)
+  15:81     error    line too long (104 > 80 characters)  (line-length)
+  16:5      error    wrong indentation: expected 2 but found 4  (indentation)
+  19:5      error    wrong indentation: expected 2 but found 4  (indentation)
+  20:9      error    wrong indentation: expected 6 but found 8  (indentation)
+
+➜  Mapping "
+dquote> f
+dquote> quit
+dquote> OB"
+zsh: command not found: \nf\nquit\nOB
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:5      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  16:5      error    wrong indentation: expected 2 but found 4  (indentation)
+  18:5      error    wrong indentation: expected 2 but found 4  (indentation)
+  21:5      error    wrong indentation: expected 2 but found 4  (indentation)
+  22:9      error    wrong indentation: expected 6 but found 8  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  12:7      error    wrong indentation: expected 8 but found 6  (indentation)
+  12:81     error    line too long (96 > 80 characters)  (line-length)
+  13:7      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  12:81     error    line too long (98 > 80 characters)  (line-length)
+  13:9      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:9      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:9      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  14:81     error    line too long (124 > 80 characters)  (line-length)
+  15:9      error    wrong indentation: expected 4 but found 8  (indentation)
+  17:9      error    wrong indentation: expected 4 but found 8  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:9      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  14:81     error    line too long (124 > 80 characters)  (line-length)
+  15:9      error    wrong indentation: expected 4 but found 8  (indentation)
+  17:9      error    wrong indentation: expected 4 but found 8  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  12:81     error    line too long (98 > 80 characters)  (line-length)
+  13:9      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  13:81     error    line too long (124 > 80 characters)  (line-length)
+  14:9      error    wrong indentation: expected 4 but found 8  (indentation)
+  14:81     error    line too long (108 > 80 characters)  (line-length)
+  15:9      error    wrong indentation: expected 4 but found 8  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  12:81     error    line too long (98 > 80 characters)  (line-length)
+  13:9      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  14:81     error    line too long (104 > 80 characters)  (line-length)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  12:81     error    line too long (94 > 80 characters)  (line-length)
+  13:5      error    syntax error: could not find expected ':' (syntax)
+  14:81     error    line too long (104 > 80 characters)  (line-length)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  12:81     error    line too long (98 > 80 characters)  (line-length)
+  13:9      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  13:81     error    line too long (124 > 80 characters)  (line-length)
+  14:9      error    wrong indentation: expected 4 but found 8  (indentation)
+  14:81     error    line too long (108 > 80 characters)  (line-length)
+  15:9      error    wrong indentation: expected 4 but found 8  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:81     error    line too long (124 > 80 characters)  (line-length)
+  15:9      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  15:81     error    line too long (108 > 80 characters)  (line-length)
+  16:9      error    wrong indentation: expected 4 but found 8  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:81     error    line too long (123 > 80 characters)  (line-length)
+  15:9      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  15:81     error    line too long (107 > 80 characters)  (line-length)
+  16:9      error    wrong indentation: expected 4 but found 8  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:81     error    line too long (123 > 80 characters)  (line-length)
+  15:9      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  15:81     error    line too long (107 > 80 characters)  (line-length)
+  16:9      error    wrong indentation: expected 4 but found 8  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:81     error    line too long (88 > 80 characters)  (line-length)
+  14:87     error    trailing spaces  (trailing-spaces)
+  16:9      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  16:81     error    line too long (89 > 80 characters)  (line-length)
+  16:88     error    trailing spaces  (trailing-spaces)
+  18:9      error    wrong indentation: expected 4 but found 8  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:81     error    line too long (86 > 80 characters)  (line-length)
+  16:9      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  16:81     error    line too long (87 > 80 characters)  (line-length)
+  18:9      error    wrong indentation: expected 4 but found 8  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:81     error    line too long (86 > 80 characters)  (line-length)
+  16:9      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  16:81     error    line too long (87 > 80 characters)  (line-length)
+  18:3      error    wrong indentation: expected 0 but found 2  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:81     error    line too long (86 > 80 characters)  (line-length)
+  16:9      error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:81     error    line too long (86 > 80 characters)  (line-length)
+  17:9      error    syntax error: could not find expected ':' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  14:81     error    line too long (86 > 80 characters)  (line-length)
+  17:1      error    syntax error: could not find expected ':' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  16:81     error    line too long (85 > 80 characters)  (line-length)
+  17:81     error    line too long (87 > 80 characters)  (line-length)
+  24:9      error    syntax error: could not find expected ':' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  16:81     error    line too long (85 > 80 characters)  (line-length)
+  17:81     error    line too long (87 > 80 characters)  (line-length)
+  24:81     error    line too long (81 > 80 characters)  (line-length)
+  29:11     error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  42:11     error    wrong indentation: expected 4 but found 10  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  32:11     error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  45:11     error    wrong indentation: expected 4 but found 10  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  32:11     error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  45:11     error    wrong indentation: expected 4 but found 10  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  32:11     error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  45:11     error    wrong indentation: expected 4 but found 10  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  32:11     error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  36:6      error    syntax error: could not find expected ':' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  36:6      error    syntax error: could not find expected ':' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  6:11      error    syntax error: mapping values are not allowed here (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  36:6      error    syntax error: could not find expected ':' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  36:6      error    syntax error: could not find expected ':' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  35:63     error    syntax error: could not find expected ':' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  35:63     error    syntax error: could not find expected ':' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  36:8      error    syntax error: could not find expected ':' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  34:5      error    syntax error: could not find expected ':' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  24:81     error    line too long (81 > 80 characters)  (line-length)
+  30:11     error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  24:81     error    line too long (81 > 80 characters)  (line-length)
+  30:11     error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  43:11     error    wrong indentation: expected 4 but found 10  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  5:1       warning  missing document start "---"  (document-start)
+  15:81     error    line too long (87 > 80 characters)  (line-length)
+  16:81     error    line too long (88 > 80 characters)  (line-length)
+  21:81     error    line too long (81 > 80 characters)  (line-length)
+  27:11     error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  41:11     error    wrong indentation: expected 4 but found 10  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  16:81     error    line too long (87 > 80 characters)  (line-length)
+  17:81     error    line too long (88 > 80 characters)  (line-length)
+  22:81     error    line too long (81 > 80 characters)  (line-length)
+  28:11     error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  41:11     error    wrong indentation: expected 4 but found 10  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  17:81     error    line too long (87 > 80 characters)  (line-length)
+  18:81     error    line too long (88 > 80 characters)  (line-length)
+  22:81     error    line too long (81 > 80 characters)  (line-length)
+  28:11     error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  41:11     error    wrong indentation: expected 4 but found 10  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  2:12      error    trailing spaces  (trailing-spaces)
+  4:12      error    trailing spaces  (trailing-spaces)
+  6:22      error    trailing spaces  (trailing-spaces)
+  12:81     error    line too long (87 > 80 characters)  (line-length)
+  13:81     error    line too long (88 > 80 characters)  (line-length)
+  17:81     error    line too long (81 > 80 characters)  (line-length)
+  23:11     error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  36:11     error    wrong indentation: expected 4 but found 10  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  12:81     error    line too long (87 > 80 characters)  (line-length)
+  13:81     error    line too long (88 > 80 characters)  (line-length)
+  17:81     error    line too long (81 > 80 characters)  (line-length)
+  23:11     error    syntax error: expected <block end>, but found '<scalar>' (syntax)
+  36:11     error    wrong indentation: expected 4 but found 10  (indentation)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  1:1       warning  missing document start "---"  (document-start)
+  4:25      error    syntax error: found unknown escape character '-' (syntax)
+  10:81     error    line too long (88 > 80 characters)  (line-length)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  5:25      error    syntax error: found unknown escape character '-' (syntax)
+  11:81     error    line too long (88 > 80 characters)  (line-length)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  4:29      error    syntax error: mapping values are not allowed here (syntax)
+  10:81     error    line too long (88 > 80 characters)  (line-length)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  4:22      error    trailing spaces  (trailing-spaces)
+  5:25      error    syntax error: found unknown escape character '-' (syntax)
+  11:81     error    line too long (88 > 80 characters)  (line-length)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  5:25      error    syntax error: found unknown escape character '-' (syntax)
+  11:81     error    line too long (88 > 80 characters)  (line-length)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  10:81     error    line too long (87 > 80 characters)  (line-length)
+  11:81     error    line too long (88 > 80 characters)  (line-length)
+  16:32     error    syntax error: mapping values are not allowed here (syntax)
+
+➜  Mapping pwd
+/Users/Laur/Documents/Dissertation/Projects/Chap3/PopGen/Mapping
+➜  Mapping pwd
+/Users/Laur/Documents/Dissertation/Projects/Chap3/PopGen/Mapping
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  2:81      error    line too long (90 > 80 characters)  (line-length)
+  10:81     error    line too long (87 > 80 characters)  (line-length)
+  11:81     error    line too long (88 > 80 characters)  (line-length)
+  16:32     error    syntax error: mapping values are not allowed here (syntax)
+
+➜  Mapping yamllint snakefile.yml
+snakefile.yml
+  2:81      error    line too long (90 > 80 characters)  (line-length)
+  10:81     error    line too long (87 > 80 characters)  (line-length)
+  11:81     error    line too long (88 > 80 characters)  (line-length)
+  16:32     error    syntax error: mapping values are not allowed here (syntax)
